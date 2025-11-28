@@ -165,11 +165,11 @@ services:
       - ./LevelUp_Product_service/target:/app
     command: >
       java
-      -Xmx120m
+      -Xmx100m
       -Xms64m
       -XX:+UseSerialGC
-      -XX:MaxMetaspaceSize=64m
-      -XX:CompressedClassSpaceSize=16m
+      -XX:MaxMetaspaceSize=96m
+      -XX:CompressedClassSpaceSize=24m
       -Djava.security.egd=file:/dev/./urandom
       -jar LevelUp_Product_service-0.0.1-SNAPSHOT.jar
     ports:

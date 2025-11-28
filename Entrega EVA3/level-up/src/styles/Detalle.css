@@ -1,0 +1,145 @@
+.detalle-page {
+  min-height: calc(100vh - 200px);
+  padding-top: 6rem;
+  padding-bottom: 3rem;
+}
+
+.breadcrumb {
+  background: transparent;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "›";
+  color: var(--text-secondary);
+}
+
+.breadcrumb-item.active {
+  color: var(--text-secondary);
+}
+
+.detalle-imagen-container {
+  background: var(--card-bg);
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detalle-imagen-container img {
+  max-height: 400px;
+  object-fit: contain;
+}
+
+.detalle-info {
+  background: var(--card-bg);
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 2rem;
+  height: 100%;
+}
+
+.detalle-titulo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.cantidad-selector {
+  max-width: 250px;
+}
+
+.cantidad-selector input[type="number"]:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+}
+
+.cantidad-control input[type="number"] {
+  background: #111;
+  border: 1px solid #333;
+  color: var(--text-primary);
+}
+
+.cantidad-control input[type="number"]:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .detalle-page {
+    padding-top: 5rem;
+  }
+
+  .detalle-imagen-container {
+    min-height: 300px;
+  }
+
+  .detalle-imagen-container img {
+    max-height: 250px;
+  }
+}
+
+/* Clases para elementos específicos */
+.detalle-loading {
+  padding-top: 6rem;
+  min-height: calc(100vh - 200px);
+}
+
+.detalle-breadcrumb-link {
+  color: var(--accent-blue);
+}
+
+.detalle-badge {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.detalle-titulo-producto {
+  color: var(--text-primary);
+}
+
+.detalle-categoria {
+  color: var(--accent-blue);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.detalle-precio {
+  color: var(--accent-green);
+  font-size: 2.5rem;
+}
+
+.detalle-seccion-titulo {
+  color: var(--text-primary);
+}
+
+.detalle-descripcion {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.detalle-stock-disponible {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.detalle-cantidad-input {
+  max-width: 150px;
+  background: #111;
+  border: 1px solid #333;
+  color: var(--text-primary);
+}
+
+.detalle-btn-agregar {
+  padding: 0.75rem;
+}
+
+.detalle-btn-volver {
+  padding: 0.75rem 2rem;
+}

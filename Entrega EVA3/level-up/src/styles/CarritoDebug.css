@@ -1,0 +1,72 @@
+.carrito-debug {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #222;
+  border: 2px solid #39FF14;
+  border-radius: 8px;
+  padding: 15px;
+  max-width: 300px;
+  z-index: 9999;
+  font-size: 0.85rem;
+}
+
+.carrito-debug-title {
+  color: #39FF14;
+  margin-bottom: 10px;
+}
+
+.carrito-debug-info {
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.carrito-debug-info p {
+  margin: 5px 0;
+}
+
+.carrito-debug-details {
+  margin-bottom: 10px;
+  color: #ddd;
+}
+
+.carrito-debug-summary {
+  cursor: pointer;
+  color: #1E90FF;
+}
+
+.carrito-debug-pre {
+  font-size: 0.7rem;
+  background: #111;
+  padding: 5px;
+  border-radius: 4px;
+  max-height: 150px;
+  overflow: auto;
+  margin-top: 5px;
+}
+
+.carrito-debug-buttons {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
+
+.carrito-debug-btn-primary {
+  background: #1E90FF;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #000;
+  font-weight: bold;
+}
+
+.carrito-debug-btn-danger {
+  background: #dc3545;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+}

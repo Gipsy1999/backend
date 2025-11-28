@@ -1,0 +1,108 @@
+{
+  "info": {
+    "name": "LevelUp - Product Service",
+    "description": "Colección para probar el servicio de productos",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://144.22.43.202:8083",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Health Check",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/productos/health"
+      }
+    },
+    {
+      "name": "2. Get All Products",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/productos"
+      }
+    },
+    {
+      "name": "3. Get Featured Products",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/productos/destacados"
+      }
+    },
+    {
+      "name": "4. Get Product by ID",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/productos/1"
+      }
+    },
+    {
+      "name": "5. Get Products by Category",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/productos/categoria/Videojuegos"
+      }
+    },
+    {
+      "name": "6. Search Products",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/productos/buscar?query=fifa",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "productos", "buscar"],
+          "query": [{"key": "query", "value": "fifa"}]
+        }
+      }
+    },
+    {
+      "name": "7. Create Product",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"FIFA 24\",\n  \"descripcion\": \"El mejor juego de fútbol\",\n  \"precio\": 59990,\n  \"stock\": 100,\n  \"categoria\": \"Videojuegos\",\n  \"plataforma\": \"PS5\",\n  \"imagenUrl\": \"https://example.com/fifa24.jpg\"\n}"
+        },
+        "url": "{{baseUrl}}/api/productos"
+      }
+    },
+    {
+      "name": "8. Update Product",
+      "request": {
+        "method": "PUT",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"FIFA 24 - Edición Especial\",\n  \"precio\": 69990,\n  \"stock\": 50\n}"
+        },
+        "url": "{{baseUrl}}/api/productos/1"
+      }
+    },
+    {
+      "name": "9. Activate Product",
+      "request": {
+        "method": "PUT",
+        "url": "{{baseUrl}}/api/productos/1/activar"
+      }
+    },
+    {
+      "name": "10. Soft Delete Product",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/api/productos/1"
+      }
+    },
+    {
+      "name": "11. Permanent Delete Product",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/api/productos/1/permanente"
+      }
+    }
+  ]
+}

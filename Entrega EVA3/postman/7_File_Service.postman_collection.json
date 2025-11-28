@@ -1,0 +1,88 @@
+{
+  "info": {
+    "name": "LevelUp - File Service",
+    "description": "Colección para probar el servicio de archivos (upload/download)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://144.22.43.202:8087",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Health Check",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/files/health"
+      }
+    },
+    {
+      "name": "2. Upload File",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "",
+              "description": "Selecciona un archivo (jpg, jpeg, png, gif, webp)"
+            }
+          ]
+        },
+        "url": "{{baseUrl}}/api/files/upload"
+      }
+    },
+    {
+      "name": "3. Upload Product Image",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "",
+              "description": "Selecciona una imagen de producto"
+            },
+            {
+              "key": "productoId",
+              "value": "1",
+              "type": "text",
+              "description": "ID del producto"
+            }
+          ]
+        },
+        "url": "{{baseUrl}}/api/files/upload/producto"
+      }
+    },
+    {
+      "name": "4. Download File",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/files/example.jpg"
+      }
+    },
+    {
+      "name": "5. Download Product Image",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/files/productos/producto_1.jpg"
+      }
+    },
+    {
+      "name": "6. Delete File",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/api/files/example.jpg"
+      }
+    }
+  ]
+}

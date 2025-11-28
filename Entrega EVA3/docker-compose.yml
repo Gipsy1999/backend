@@ -1,0 +1,298 @@
+version: '3.8'
+
+services:
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: levelup_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: levelup_db
+      POSTGRES_USER: levelup
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-LevelUp2024!}
+      POSTGRES_INITDB_ARGS: "-c shared_buffers=64MB -c effective_cache_size=128MB"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./BD_tablas:/docker-entrypoint-initdb.d
+    command: >
+      postgres
+      -c max_connections=50
+      -c shared_buffers=64MB
+      -c effective_cache_size=128MB
+      -c maintenance_work_mem=16MB
+      -c wal_buffers=2MB
+      -c random_page_cost=1.1
+      -c effective_io_concurrency=200
+    ports:
+      - "5432:5432"
+    networks:
+      - levelup-network
+    deploy:
+      resources:
+        limits:
+          memory: 200M
+        reservations:
+          memory: 100M
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U levelup"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # API Gateway
+  api-gateway:
+    image: openjdk:21-jdk-slim
+    container_name: levelup_gateway
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./LevelUp_Api_gateway/target:/app
+    command: >
+      java
+      -Xmx110m
+      -Xms64m
+      -XX:+UseSerialGC
+      -XX:MaxMetaspaceSize=64m
+      -XX:CompressedClassSpaceSize=16m
+      -Djava.security.egd=file:/dev/./urandom
+      -jar LevelUp_Api_gateway-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/levelup_db
+      SPRING_DATASOURCE_USERNAME: levelup
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-LevelUp2024!}
+      SERVER_PORT: 8080
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - levelup-network
+    deploy:
+      resources:
+        limits:
+          memory: 130M
+        reservations:
+          memory: 80M
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # Auth Service
+  auth-service:
+    image: openjdk:21-jdk-slim
+    container_name: levelup_auth
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./LevelUp_Auth_service/target:/app
+    command: >
+      java
+      -Xmx120m
+      -Xms64m
+      -XX:+UseSerialGC
+      -XX:MaxMetaspaceSize=64m
+      -XX:CompressedClassSpaceSize=16m
+      -Djava.security.egd=file:/dev/./urandom
+      -jar LevelUp_Auth_service-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/levelup_db
+      SPRING_DATASOURCE_USERNAME: levelup
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-LevelUp2024!}
+      SERVER_PORT: 8081
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - levelup-network
+    deploy:
+      resources:
+        limits:
+          memory: 140M
+        reservations:
+          memory: 80M
+
+  # User Service
+  user-service:
+    image: openjdk:21-jdk-slim
+    container_name: levelup_user
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./LevelUp_User_service/target:/app
+    command: >
+      java
+      -Xmx120m
+      -Xms64m
+      -XX:+UseSerialGC
+      -XX:MaxMetaspaceSize=64m
+      -XX:CompressedClassSpaceSize=16m
+      -Djava.security.egd=file:/dev/./urandom
+      -jar LevelUp_User_service-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/levelup_db
+      SPRING_DATASOURCE_USERNAME: levelup
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-LevelUp2024!}
+      SERVER_PORT: 8082
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - levelup-network
+    deploy:
+      resources:
+        limits:
+          memory: 140M
+        reservations:
+          memory: 80M
+
+  # Product Service
+  product-service:
+    image: openjdk:21-jdk-slim
+    container_name: levelup_product
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./LevelUp_Product_service/target:/app
+    command: >
+      java
+      -Xmx120m
+      -Xms64m
+      -XX:+UseSerialGC
+      -XX:MaxMetaspaceSize=64m
+      -XX:CompressedClassSpaceSize=16m
+      -Djava.security.egd=file:/dev/./urandom
+      -jar LevelUp_Product_service-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/levelup_db
+      SPRING_DATASOURCE_USERNAME: levelup
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-LevelUp2024!}
+      SERVER_PORT: 8083
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - levelup-network
+    deploy:
+      resources:
+        limits:
+          memory: 140M
+        reservations:
+          memory: 80M
+
+  # Order Service
+  order-service:
+    image: openjdk:21-jdk-slim
+    container_name: levelup_order
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./LevelUp_Order_service/target:/app
+    command: >
+      java
+      -Xmx110m
+      -Xms64m
+      -XX:+UseSerialGC
+      -XX:MaxMetaspaceSize=64m
+      -XX:CompressedClassSpaceSize=16m
+      -Djava.security.egd=file:/dev/./urandom
+      -jar LevelUp_Order_service-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8084:8084"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/levelup_db
+      SPRING_DATASOURCE_USERNAME: levelup
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-LevelUp2024!}
+      SERVER_PORT: 8084
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - levelup-network
+    deploy:
+      resources:
+        limits:
+          memory: 130M
+        reservations:
+          memory: 80M
+
+  # Analytics Service
+  analytics-service:
+    image: openjdk:21-jdk-slim
+    container_name: levelup_analytics
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./LevelUp_Analytics_service/target:/app
+    command: >
+      java
+      -Xmx100m
+      -Xms64m
+      -XX:+UseSerialGC
+      -XX:MaxMetaspaceSize=64m
+      -XX:CompressedClassSpaceSize=16m
+      -Djava.security.egd=file:/dev/./urandom
+      -jar LevelUp_Analytics_service-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8085:8085"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/levelup_db
+      SPRING_DATASOURCE_USERNAME: levelup
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-LevelUp2024!}
+      SERVER_PORT: 8085
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - levelup-network
+    deploy:
+      resources:
+        limits:
+          memory: 120M
+        reservations:
+          memory: 70M
+
+  # Nginx para Frontend
+  nginx:
+    image: nginx:alpine
+    container_name: levelup_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./level-up/build:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - levelup-network
+    deploy:
+      resources:
+        limits:
+          memory: 50M
+        reservations:
+          memory: 20M
+    depends_on:
+      - api-gateway
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  levelup-network:
+    driver: bridge

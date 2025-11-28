@@ -1,0 +1,109 @@
+{
+  "info": {
+    "name": "LevelUp - Analytics Service",
+    "description": "Colección para probar el servicio de analíticas",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://144.22.43.202:8085",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Health Check",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/analytics/health"
+      }
+    },
+    {
+      "name": "2. Get Dashboard",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/analytics/dashboard"
+      }
+    },
+    {
+      "name": "3. Get Total Sales",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/analytics/ventas/totales"
+      }
+    },
+    {
+      "name": "4. Get Sales by Month",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/analytics/ventas/por-mes?year=2025&month=11",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "analytics", "ventas", "por-mes"],
+          "query": [
+            {"key": "year", "value": "2025"},
+            {"key": "month", "value": "11"}
+          ]
+        }
+      }
+    },
+    {
+      "name": "5. Get Top Selling Products",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/analytics/productos/mas-vendidos?limit=10",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "analytics", "productos", "mas-vendidos"],
+          "query": [{"key": "limit", "value": "10"}]
+        }
+      }
+    },
+    {
+      "name": "6. Get Low Stock Products",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/analytics/productos/bajo-stock?threshold=10",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "analytics", "productos", "bajo-stock"],
+          "query": [{"key": "threshold", "value": "10"}]
+        }
+      }
+    },
+    {
+      "name": "7. Get Orders by Status",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/analytics/ordenes/por-estado"
+      }
+    },
+    {
+      "name": "8. Get New Users",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/analytics/usuarios/nuevos?days=30",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "analytics", "usuarios", "nuevos"],
+          "query": [{"key": "days", "value": "30"}]
+        }
+      }
+    },
+    {
+      "name": "9. Get Users by Role",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/analytics/usuarios/por-rol"
+      }
+    },
+    {
+      "name": "10. Get Revenue by Category",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/analytics/ingresos/por-categoria"
+      }
+    }
+  ]
+}

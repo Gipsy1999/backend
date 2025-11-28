@@ -1,0 +1,83 @@
+{
+  "info": {
+    "name": "LevelUp - Notification Service",
+    "description": "Colección para probar el servicio de notificaciones por email",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://144.22.43.202:8086",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Health Check",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/notificaciones/health"
+      }
+    },
+    {
+      "name": "2. Send Simple Email",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"to\": \"usuario@example.com\",\n  \"subject\": \"Prueba de Email\",\n  \"body\": \"Este es un email de prueba desde LevelUp\"\n}"
+        },
+        "url": "{{baseUrl}}/api/notificaciones/email/simple"
+      }
+    },
+    {
+      "name": "3. Send Welcome Email",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"to\": \"nuevo.usuario@example.com\",\n  \"nombre\": \"Juan Pérez\"\n}"
+        },
+        "url": "{{baseUrl}}/api/notificaciones/email/bienvenida"
+      }
+    },
+    {
+      "name": "4. Send Order Confirmation Email",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"to\": \"cliente@example.com\",\n  \"nombre\": \"María González\",\n  \"numeroOrden\": \"ORD-2025-001\",\n  \"total\": 119980\n}"
+        },
+        "url": "{{baseUrl}}/api/notificaciones/email/confirmacion-orden"
+      }
+    },
+    {
+      "name": "5. Send Order Status Change Email",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"to\": \"cliente@example.com\",\n  \"nombre\": \"María González\",\n  \"numeroOrden\": \"ORD-2025-001\",\n  \"nuevoEstado\": \"EN_CAMINO\"\n}"
+        },
+        "url": "{{baseUrl}}/api/notificaciones/email/cambio-estado-orden"
+      }
+    },
+    {
+      "name": "6. Send Password Recovery Email",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"to\": \"usuario@example.com\",\n  \"nombre\": \"Juan Pérez\",\n  \"tokenRecuperacion\": \"abc123xyz789\"\n}"
+        },
+        "url": "{{baseUrl}}/api/notificaciones/email/recuperar-password"
+      }
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "info": {
+    "name": "LevelUp - Order Service",
+    "description": "Colección para probar el servicio de órdenes",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://144.22.43.202:8084",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Health Check",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/ordenes/health"
+      }
+    },
+    {
+      "name": "2. Get All Orders",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/ordenes"
+      }
+    },
+    {
+      "name": "3. Get Order by ID",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/ordenes/1"
+      }
+    },
+    {
+      "name": "4. Get Orders by User",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/ordenes/usuario/1"
+      }
+    },
+    {
+      "name": "5. Get Orders by Status",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/ordenes/estado/PENDIENTE"
+      }
+    },
+    {
+      "name": "6. Create Order",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuarioId\": 1,\n  \"items\": [\n    {\n      \"productoId\": 1,\n      \"cantidad\": 2,\n      \"precioUnitario\": 59990\n    },\n    {\n      \"productoId\": 2,\n      \"cantidad\": 1,\n      \"precioUnitario\": 49990\n    }\n  ],\n  \"metodoPago\": \"TARJETA_CREDITO\",\n  \"direccionEnvio\": \"Calle Falsa 123\"\n}"
+        },
+        "url": "{{baseUrl}}/api/ordenes"
+      }
+    },
+    {
+      "name": "7. Delete Order",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/api/ordenes/1"
+      }
+    }
+  ]
+}

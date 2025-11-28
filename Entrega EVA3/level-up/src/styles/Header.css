@@ -1,0 +1,109 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--accent-blue);
+  z-index: 1000;
+}
+
+header .navbar {
+  background: var(--bg-primary);
+  padding: 0.75rem 0;
+}
+
+header .navbar-brand {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent-green) !important;
+  text-decoration: none;
+}
+
+header .nav-link {
+  color: var(--text-primary) !important;
+  font-weight: 500;
+  padding: 0.5rem 1rem !important;
+  transition: color 0.3s ease;
+}
+
+header .nav-link:hover {
+  color: var(--accent-blue) !important;
+}
+
+header .navbar-toggler {
+  border-color: var(--accent-green);
+}
+
+header .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(57, 255, 20, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.carrito-dropdown {
+  position: fixed !important;
+  right: 2rem;
+  top: 4.5rem;
+  min-width: 320px;
+  max-width: 400px;
+  max-height: 500px;
+  overflow-y: auto;
+  z-index: 1000;
+  background: #222;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  display: block;
+}
+
+.carrito-dropdown-item {
+  font-size: 0.9rem;
+}
+
+.carrito-dropdown-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.carrito-dropdown-total {
+  color: var(--accent-green);
+  font-size: 1.1rem;
+}
+
+.carrito-dropdown-btn {
+  background: var(--accent-green);
+  color: #000;
+  font-weight: bold;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.carrito-dropdown-btn:hover {
+  background: #2dd40a;
+}
+
+@media (max-width: 600px) {
+  .carrito-dropdown {
+    right: 0.5rem;
+    left: 0.5rem;
+    min-width: unset;
+    width: auto;
+    max-width: 98vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 0.6rem 0;
+    height: auto;
+  }
+  .nav-menu {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

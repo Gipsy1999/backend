@@ -1,0 +1,37 @@
+{
+  "info": {
+    "name": "LevelUp - Config Service",
+    "description": "Colección para probar el servicio de configuración centralizada",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://144.22.43.202:8888",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Health Check",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/config/health"
+      }
+    },
+    {
+      "name": "2. Get Info",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/config/info"
+      }
+    },
+    {
+      "name": "3. Get Services List",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/config/services"
+      }
+    }
+  ]
+}

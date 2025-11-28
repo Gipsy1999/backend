@@ -48,11 +48,11 @@ services:
       - ./LevelUp_Api_gateway/target:/app
     command: >
       java
-      -Xmx110m
-      -Xms64m
+      -Xmx160m
+      -Xms80m
       -XX:+UseSerialGC
-      -XX:MaxMetaspaceSize=64m
-      -XX:CompressedClassSpaceSize=16m
+      -XX:MaxMetaspaceSize=80m
+      -XX:CompressedClassSpaceSize=20m
       -Djava.security.egd=file:/dev/./urandom
       -jar LevelUp_Api_gateway-0.0.1-SNAPSHOT.jar
     ports:
@@ -71,9 +71,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 130M
+          memory: 200M
         reservations:
-          memory: 80M
+          memory: 100M
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
       interval: 30s

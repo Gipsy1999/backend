@@ -10,7 +10,6 @@ services:
       POSTGRES_DB: levelup_db
       POSTGRES_USER: levelup
       POSTGRES_PASSWORD: ${DB_PASSWORD:-LevelUp2024!}
-      POSTGRES_INITDB_ARGS: "-c shared_buffers=64MB -c effective_cache_size=128MB"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./BD_tablas:/docker-entrypoint-initdb.d

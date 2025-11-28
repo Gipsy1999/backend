@@ -41,7 +41,7 @@ services:
 
   # API Gateway
   api-gateway:
-    image: openjdk:21-jdk-slim
+    image: eclipse-temurin:21-jre-alpine
     container_name: levelup_gateway
     restart: unless-stopped
     working_dir: /app
@@ -84,7 +84,7 @@ services:
 
   # Auth Service
   auth-service:
-    image: openjdk:21-jdk-slim
+    image: eclipse-temurin:21-jre-alpine
     container_name: levelup_auth
     restart: unless-stopped
     working_dir: /app
@@ -121,7 +121,7 @@ services:
 
   # User Service
   user-service:
-    image: openjdk:21-jdk-slim
+    image: eclipse-temurin:21-jre-alpine
     container_name: levelup_user
     restart: unless-stopped
     working_dir: /app
@@ -158,7 +158,7 @@ services:
 
   # Product Service
   product-service:
-    image: openjdk:21-jdk-slim
+    image: eclipse-temurin:21-jre-alpine
     container_name: levelup_product
     restart: unless-stopped
     working_dir: /app
@@ -195,7 +195,7 @@ services:
 
   # Order Service
   order-service:
-    image: openjdk:21-jdk-slim
+    image: eclipse-temurin:21-jre-alpine
     container_name: levelup_order
     restart: unless-stopped
     working_dir: /app
@@ -232,7 +232,7 @@ services:
 
   # Analytics Service
   analytics-service:
-    image: openjdk:21-jdk-slim
+    image: eclipse-temurin:21-jre-alpine
     container_name: levelup_analytics
     restart: unless-stopped
     working_dir: /app
